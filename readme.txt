@@ -1,1 +1,0 @@
-Weasny's first blog webapp
