@@ -1,12 +1,39 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}Login {% endblock %}
-
-{% block styles %}
-{{super()}}
-<link rel="stylesheet" type="text/css" href="{{url_for('.static', filename='body.css')}}">
-{% endblock %}
-
+{% extends "layout.html" %}
 {% block body %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">MainPage</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a>
+        <li><a href="#">contact</a>
+        <li><a href="#">allname</a>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"> 
+	{% if not session.login_in %}
+          <li><a href="{{ url_for('login') }}">login</a>
+	{% else %}
+          <li><a href="{{ url_for('add_article') }}">add article</a>
+	  <li><a href="{{ url_for('admin') }}">admin</a>
+	  <li><a href="{{ url_for('logout') }}">logout</a>
+	{% endif %}
+      </ul>
+    </div>
+ </div>
+</div>
+{% endblock %}<!-- navbar -->
+
+<div class="alert alert-success" role="alert">
+	
+          <p class="text-center" id="alert">{{ session.login_in }}</p>
+</div>
+<!--alert  -->
+
 <div class="container">
 
       <form class="form-signin" action="{{ url_for('login') }}" method="post">
@@ -21,7 +48,7 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
+      </form><!-- login in -->
 
-    </div>
-{% endblock %}
+</div>
+{% endblock %}<!-- body -->

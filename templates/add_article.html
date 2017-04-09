@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('show_article', page=1) }}">MainPage</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a>
+        <li><a href="#">contact</a>
+        <li><a href="#">allname</a>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"> 
+	{% if not session.login_in %}
+          <li><a href="{{ url_for('login') }}">login</a>
+	{% else %}
+          <li><a href="{{ url_for('add_article') }}">add article</a>
+	  <li><a href="{{ url_for('admin') }}">admin</a>
+	  <li><a href="{{ url_for('logout') }}">logout</a>
+	{% endif %}
+      </ul>
+    </div>
+ </div>
+</div>
+{% endblock %}<!-- navbar -->
+
+<div class="alert alert-success" role="alert">
+          
+	{% for message in get_flashed_messages() %}
+	  <p class="text-center" id="alert">{{ message }}</p>
+	{% endfor %}
+</div>
+<!--alert  -->
+
+
+  <div class="container">
+    <form method="post" action="{{url_for('add_article')}}">
+      <label> title</lable><br>
+      <input class="form-control" type="text" name="title"  size="60"><br>
+      <textarea class="form-control" name="content" rows="5" cols="65"></textarea><br>
+      <button type="submit">submit</button>
+    </form>
+  </div>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+</footer><!-- footer -->
+
+
+{% endblock %}

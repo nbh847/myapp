@@ -1,0 +1,15 @@
+<html>
+<body>
+{% for message in get_flashed_messages() %}
+  <strong>{{ message }}</strong>
+{% endfor %}
+  <div class="editor">
+    <form method="post" action="{{url_for('edit_article')}}">
+      <label> title</lable><br>
+      <input type="text" name="title"  size="60"><br>
+      <textarea name="content" rows="5" cols="65"></textarea><br>
+      <button type="submit">submit</button>
+    </form>
+  </div>
+</body>
+</html>

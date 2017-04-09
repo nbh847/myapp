@@ -1,0 +1,21 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+
+{% block styles %}
+{{super()}}
+<link href="{{url_for('.static', filename='body.css')}}" rel="stylesheet">
+<link href="{{url_for('.static', filename='blog.css')}}" rel="stylesheet">
+<link href="{{url_for('.static', filename='static.css')}}" rel="stylesheet">
+<link href="{{url_for('.static', filename='dashboard.css')}}" rel="stylesheet">
+<link href="{{url_for('.static', filename='navbar-top.css')}}" rel="stylesheet">
+
+{% endblock %}<!--styles -->
+
+<title>Weasny's blog</title>
+
+
+{% endblock %}<!--head -->
+
+
+

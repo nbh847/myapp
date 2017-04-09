@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('show_article', page=1) }}">MainPage</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a>
+        <li><a href="#">contact</a>
+        <li><a href="#">allname</a>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"> 
+	{% if not session.login_in %}
+          <li><a href="{{ url_for('login') }}">login</a>
+	{% else %}
+          <li><a href="{{ url_for('add_article') }}">add article</a>
+	  <li><a href="{{ url_for('admin') }}">admin</a>
+	  <li><a href="{{ url_for('logout') }}">logout</a>
+	  <li><a href="{{ url_for('test') }}">test</a>
+	{% endif %}
+      </ul>
+    </div>
+ </div>
+</div>
+{% endblock %}<!-- navbar -->
+
+<div class="alert alert-success" role="alert">
+	
+          <p class="text-center" id="alert">{{ session.login_in }}</p>
+</div>
+<!--alert  -->
+
+<div class="container">
+	
+      <div class="row">
+	
+	<div class="col-md-3 blog-sidebar">
+	  <div class="sidebar-module sidebar-module-inset">
+	    <h4>About</h4>
+	    <p>
+	      This is Weasny'blog
+	       
+	    </p>
+	  </div>
+	  <div class="sidebar-module">2</div>
+	  <div class="sidebar-module">3</div>
+	</div>
+	
+	<!-- /.blog-side -->
+
+	<div class="col-md-9 blog-main">
+	  {% for article in article_list %}
+	  <div class="blog-post">
+		<div class="jumbotron">
+	            
+		    <h2 class="blog-post-title" name="title">title: {{article.title}}</h2>
+		    <p class="blog-post-meta" name="date">
+			date: {{article.aDate.strftime("%Y-%m-%d %H:%M:%S")}}<a href="#">Mark</a>
+	 	    </p>
+		    <p name="content">
+			content: {{article.content}}
+		    </p>
+	            
+		</div>
+	  </div>
+	  {% endfor %}
+	</div>
+	<!-- /.blog-main -->
+      </div>
+    </div><!-- /.container -->
+
+
+<div class="pagination">
+ {% if pagination.has_prev %}
+   <a href="/show_article/{{ pagination.prev_num }}">previous</a>
+ {% endif %}
+ {% for i in pagination.iter_pages() %}
+    <a href="{{ url_for('show_article', page=i) }}">{{ i }}</a>
+ {% endfor %}  
+</div>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+</footer><!-- footer -->
+
+{% endblock %}<!-- body -->
